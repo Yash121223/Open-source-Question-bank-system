@@ -1,0 +1,14 @@
+q2='select User_id from sample_board where User_id={}'.format(id)
+        myCursor.execute(q2)
+        s=myCursor.fetchone()
+        if s[0]==id:
+            q3='update sample_board set Marks={} where User_id ={}'.format(marks,id)
+            myCursor.execute(q3)
+            conn.commit()
+        else:
+            q3="select Name,Year from users where User_num={}".format(id)
+            myCursor.execute(q3)
+            s=myCursor.fetchone()
+            q4="insert into sample_board(User_id,Name,Year,Marks,Date) values({},'{}',{},{},'{}')".format(id,s[0],s[1],marks,dte)
+            myCursor.execute(q4)
+            conn.commit()
